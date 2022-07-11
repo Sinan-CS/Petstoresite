@@ -1,0 +1,103 @@
+            
+<section class="h-180 gradient-custom  bg-secondary" style="margin-top: 30px;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-10 col-xl-8">
+        <div class="card" style="border-radius: 10px;">
+          <div class="card-header px-4 py-5">
+            <h5 class="text-muted mb-0">Thanks for your Order, <span style="color: #00010a;"> {{orderProducts.deliveryDetails.name}}</span>!</h5>
+             <a href="/orderPage" class="d-flex align-items-center justify-content-end text-primary  mb-0" role="button" data-mdb-toggle="button">More-Details</a>
+          </div>
+          <div class="card-body p-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <p class="lead fw-normal mb-0" style="color: #000000;">Receipt</p>
+              <p class="small text-muted mb-0">Receipt Voucher : 1KAU9-84UIL</p>
+            </div>
+            <div class="card shadow-0 border mb-4">
+               {{#each orderProducts.product}}
+              <div class="card-body">
+                <div class="row">
+                 
+                  <div class="col-md-2">
+                    <img src="/imageUpload/{{pro_Id.Images.[0].image1}}"
+                      class="img-fluid" alt="Phone">
+                  </div>
+                  <div class="col-md-2 text-center " >
+                    <p class="text-muted mb-0 text-dark" style=" width:190px; padding-top:30px" >{{pro_Id.Product_Name}}</p>
+                  </div>
+                  {{!-- <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                    <p class="text-muted mb-0 small">White</p>
+                  </div> --}}
+                  {{!-- <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                    <p class="text-muted mb-0 small">Capacity: 64GB</p>
+                  </div> --}}
+                  <div class="col-md-2 text-center d-flex justify-content-center align-items-center " style="padding-left: 300px;">
+                    <p class="text-muted mb-0 small pl-50px">Qty:{{this.quantity}}</p>
+                  </div>
+                  <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                    <p class="text-muted mb-0 small">₹ {{this.subTotal}}</p>
+                  </div>
+                </div>
+               
+              </div>
+              {{/each}}
+            </div>
+           
+
+            <div class="d-flex justify-content-between pt-2">
+              <p class="fw-bold mb-0">Order Details</p>
+              <p class="text-muted mb-0"><span class="fw-bold me-4">Total</span>{{orderProducts.Total}}</p>
+            </div>
+            
+            <div class="d-flex justify-content-between pt-2">
+              <p class="text-muted mb-0">order ID:{{orderProducts._id}}</p>
+               <p class="text-muted mb-0"><span class="fw-bold me-4">Discount</span> $19.00</p>
+            </div>
+
+            <div class="d-flex justify-content-between">
+              <p class="text-muted mb-0">Date :{{ordered_on}}</p>
+              <!--<p class="text-muted mb-0"><span class="fw-bold me-4">GST 18%</span> 123</p>-->
+            </div>
+
+            <div class="d-flex justify-content-between mb-5">
+              <p class="text-muted mb-0">Payment-method:{{orderProducts.paymentMethod}}</p>
+              <p class="text-muted mb-0"><span class="fw-bold me-4">Delivery Charges</span>{{orderProducts.ShippingCharge}} </p>
+            </div>
+          </div>
+          <div class="card-footer border-0 px-4 py-5"
+            style="background-color: #b3c4c9; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
+           <div class="d-flex justify-content-between pt-2">
+              <p class="fw-bold mb-0">SHIPPING-DETAILS</p>
+            </div>
+             <div class="d-flex justify-content-between pt-2">
+              <p class="fw-bold mb-0">NAME:{{orderProducts.deliveryDetails.name}}</p>
+            </div>
+             <div class="d-flex justify-content-between pt-2">
+              <p class="text mb-0">Phone: {{orderProducts.deliveryDetails.number}}</p>
+            </div>
+             <div class="d-flex justify-content-between pt-2">
+              <p class="text mb-0">Email:{{orderProducts.deliveryDetails.email}}</p>
+               <h5 class="d-flex align-items-center justify-content-end text-dark text-uppercase mb-0">Total
+              paid: <span class="h2 mb-0 ms-2">₹ {{orderProducts.grandTotal}}</span></h5>
+            </div>
+            
+             <div class="d-flex justify-content-between pt-2">
+               <li>
+                <p>Address:{{orderProducts.deliveryDetails.house}},</p><span>,{{orderProducts.deliveryDetails.localplace}},</span>
+                <span>{{orderProducts.deliveryDetails.town}},</span>
+                <span>{{orderProducts.deliveryDetails.district}},</span>
+                <span>{{orderProducts.deliveryDetails.state}}</span>
+              </li>
+            </div>
+            <div class="d-flex justify-content-between pt-2">
+              <p class="text mb-0">Pincode:{{orderProducts.deliveryDetails.pincode}}</p>
+            </div>
+            
+            
+           
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,626 @@
+<html lang="zxx">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>PET STORE</title>
+  <link rel="icon" href="images/favicon tc.png">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+    integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="aranoz/css/bootstrap.min.css">
+  <!-- animate CSS -->
+  <link rel="stylesheet" href="aranoz/css/animate.css">
+  <!-- owl carousel CSS -->
+  <link rel="stylesheet" href="aranoz/css/owl.carousel.min.css">
+  <!-- nice select CSS -->
+  <link rel="stylesheet" href="aranoz/css/nice-select.css">
+  <!-- font awesome CSS -->
+  <link rel="stylesheet" href="aranoz/css/all.css">
+  <!-- flaticon CSS -->
+  <link rel="stylesheet" href="aranoz/css/flaticon.css">
+  <link rel="stylesheet" href="aranoz/css/themify-icons.css">
+  <!-- font awesome CSS -->
+  <link rel="stylesheet" href="aranoz/css/magnific-popup.css">
+  <!-- swiper CSS -->
+  <link rel="stylesheet" href="aranoz/css/slick.css">
+  <link rel="stylesheet" href="aranoz/css/price_rangs.css">
+  <!-- style CSS -->
+  <link rel="stylesheet" href="aranoz/css/style.css">
+  {{!-- font awesome --}}
+  <script src="https://kit.fontawesome.com/a04c146c8c.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+  
+  <!-- Header part end-->
+
+  <!--================Home Banner Area =================-->
+  <!-- breadcrumb start-->
+  
+  <!-- breadcrumb start-->
+
+  <!--================Checkout Area =================-->
+  <section class="checkout_area padding_top mt-6 bg-secondary">
+    <div class="container">
+<div class="container ">
+            <div class="returning_customer mb-4 mt-4 " style=" border-radius: 50px;" > 
+              <div class="check_title  ">
+                <h5 class=""  style="color:rgb(250, 250, 250) ">
+                  please select a address
+                </h5>
+              </div>
+              </div>
+              <div class=" container-fluid content-row  mb-4  " style=" border-radius: 50px;">
+
+              <div class="row mb-4 mt-4 " style=" border-radius: 50px;">
+              {{#each Addresses.address}}
+           
+  <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6" style=" border-radius: 50px; ">
+    
+    <div class="card rounded h-100" style="border-radius: 50px ;">
+
+      <h3></h3>
+      <p style="color:black">{{this.fname}} {{this.lname}}, {{this.house}},  {{this.towncity}}, {{this.district}}, {{this.state}}, Pincode: {{this.pincode}}</p><P style="color:black">Email: {{this.email}}</P>
+      <p style="color:black">Mobile: {{this.mobile}}</p>
+
+      <button class="btn  bg-secondary text-light" onclick="autofill('{{this.fname}}','{{this.mobile}}','{{this.email}}','{{this.house}}','{{this.towncity}}','{{this.district}}','{{this.state}}','{{this.pincode}}')">use this Address</button>
+
+    </div>
+    
+  </div>
+    {{/each}}
+    </div>
+    </div>
+
+      
+      <div class="billing_details">
+        <div class="row">
+          <div class="billing_details ">
+            <div class="row mt-3">
+              <div class="col-lg-8">
+                <h5 style="color:rgb(255, 255, 255)">
+                  or fill the form Below
+                  {{!-- <a href="#">Click here to login</a> --}}
+                </h5>
+                {{!-- <h2>or fill the form Below Billing Details</h2> --}}
+                <form class="row contact_form" action="#" id="checkoutForm" method="post" novalidate="novalidate">
+                  <div class="col-md-12 form-group p_star me-2" >
+
+                    <input type="text" class="form-control" id="fname" name="name" placeholder="Full name" />
+
+                    <input type="text" class="form-control" id="#" name="userId" value="{{Addresses._id}}" hidden />
+                  </div>
+                  {{!-- <div class="col-md-6 form-group p_star me-2" style="border: 1px solid #eee;">
+                    <input type="text" class="form-control" id="lname" name="lname" placeholder="Last name" />
+                  </div> --}}
+                  {{!-- <div class="col-md-6 form-group p_star">
+                    <input type="text" class="form-control" id="lname" name="name" placeholder="Last name" />
+                  </div> --}}
+                  <div class="col-md-6 form-group p_star" style="">
+                    <input type="text" class="form-control" id="mobile" name="number" placeholder="Phone number" />
+                  </div>
+                  <div class="col-md-6 form-group p_star" style="">
+                    <input type="text" class="form-control" id="email" name="email" placeholder="Email Address" />
+                  </div>
+
+                  <div class="col-md-12 form-group " style="">
+                    <input type="text" class="form-control" id="house" name="house"
+                      placeholder="House Name or Company name" />
+                  </div>
+
+                  {{!-- <div class="col-md-12 form-group p_star">
+                    <select class="country_select" name="country">
+                      <option>Country</option>
+                      <option>India</option>
+                      <option>America</option>
+                      <option>Pakistan</option>
+                    </select>
+                  </div> --}}
+                  <div class="col-md-12 form-group p_star" style="">
+                    <input type="text" class="form-control" id="localplace" name="localplace" placeholder="Locality" />
+                  </div>
+                  {{!-- <div class="col-md-12 form-group p_star">
+                    <input type="text" class="form-control" id="add2" name="add2" placeholder="Address line 02" />
+                  </div> --}}
+                  <div class="col-md-12 form-group p_star" style="">
+                    <input type="text" class="form-control" id="town" name="town" placeholder="Town/City" />
+                  </div>
+                  <div class="col-md-12 form-group p_star" style="">
+                    {{!-- <select class="country_select" name="district">
+                      <option>District</option>
+                      <option>Malappuram</option>
+                      <option>Calicut</option>
+                      <option>Thrissur</option>
+                    </select> --}}
+                    <input type="text" class="form-control" id="district" name="district" placeholder="District" />
+                  </div>
+                  <div class="col-md-12 form-group" style="">
+                    {{!-- <input type="text" class="form-control" id="state" name="state" placeholder="State" /> --}}
+                    <select name="state" id="state" class="form-control">
+                      <option value="">Select Your State</option>
+<option value="Andhra Pradesh">Andhra Pradesh</option>
+<option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+<option value="Arunachal Pradesh">Arunachal Pradesh</option>
+<option value="Assam">Assam</option>
+<option value="Bihar">Bihar</option>
+<option value="Chandigarh">Chandigarh</option>
+<option value="Chhattisgarh">Chhattisgarh</option>
+<option value="Dadar and Nagar Haveli">Dadar and Nagar Haveli</option>
+<option value="Daman and Diu">Daman and Diu</option>
+<option value="Delhi">Delhi</option>
+<option value="Lakshadweep">Lakshadweep</option>
+<option value="Puducherry">Puducherry</option>
+<option value="Goa">Goa</option>
+<option value="Gujarat">Gujarat</option>
+<option value="Haryana">Haryana</option>
+<option value="Himachal Pradesh">Himachal Pradesh</option>
+<option value="Jammu and Kashmir">Jammu and Kashmir</option>
+<option value="Jharkhand">Jharkhand</option>
+<option value="Karnataka">Karnataka</option>
+<option value="Kerala">Kerala</option>
+<option value="Madhya Pradesh">Madhya Pradesh</option>
+<option value="Maharashtra">Maharashtra</option>
+<option value="Manipur">Manipur</option>
+<option value="Meghalaya">Meghalaya</option>
+<option value="Mizoram">Mizoram</option>
+<option value="Nagaland">Nagaland</option>
+<option value="Odisha">Odisha</option>
+<option value="Punjab">Punjab</option>
+<option value="Rajasthan">Rajasthan</option>
+<option value="Sikkim">Sikkim</option>
+<option value="Tamil Nadu">Tamil Nadu</option>
+<option value="Telangana">Telangana</option>
+<option value="Tripura">Tripura</option>
+<option value="Uttar Pradesh">Uttar Pradesh</option>
+<option value="Uttarakhand">Uttarakhand</option>
+<option value="West Bengal">West Bengal</option>
+</select>
+                     
+                  </div>
+                  
+                  <div class="col-md-12 form-group" style="">
+                    <input type="text" class="form-control" id="pincode" name="pincode" placeholder="Pincode"
+                      value="" />
+                  </div>
+                  {{!-- <div class="col-md-12 form-group">
+                    <div class="creat_account">
+                      <input type="checkbox" id="f-option2" name="selector" />
+                      <label for="f-option2">Create an account?</label>
+                    </div>
+                  </div> --}}
+                  {{!-- <div class="col-md-12 form-group">
+                    <div class="creat_account">
+                      <h3>Shipping Details</h3>
+                      <input type="checkbox" id="f-option3" name="selector" />
+                      <label for="f-option3">Ship to a different address?</label>
+                    </div>
+                    <textarea class="form-control" name="message" id="message" rows="1"
+                      placeholder="Order Notes"></textarea>
+                  </div> --}}
+                  {{!--
+                </form> --}}
+              </div>
+              <div class="col-lg-4">
+                <div class="order_box  border-light" style=" border-radius: 50px;">
+                  <h2>Your Order</h2>
+                  <ul class="list">
+                    <li>
+                      <a style="color:darkmagenta" href="#">Products
+                          <span>Total</span> 
+                      </a>
+                    </li>
+                    {{#each cartItems.products}}
+
+                    <li>
+                      <a href="#">{{pro_Id.Product_Name}}
+                        <span class="middle">{{this.quantity}}   X </span>
+                        <span class="last">₹{{pro_Id.MRP}}</span>
+
+                      </a>
+                    </li>
+
+                    {{/each}}
+
+                    {{!-- <li>
+                      <a href="#">Fresh Tomatoes
+                        <span class="middle">x 02</span>
+                        <span class="last">$720.00</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">Fresh Brocoli
+                        <span class="middle">x 02</span>
+                        <span class="last">$720.00</span>
+                      </a>
+                    </li> --}}
+                  </ul>
+                  <ul class="list list_2">
+                    <li>
+                      <a href="#">Subtotal
+                        <span>₹ {{netTotal}}</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">Shipping
+                        <span style="color:darkred"> ₹ {{deliveryCharge}}</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">Total
+                        <span> ₹ {{grandTotal}}</span>
+                      </a>
+                    </li>
+                  </ul>
+                  <div class="flex-w flex-m w-full-sm mt-3 md-6   ">
+<button type="button" class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4  " style="height:40px ;" data-toggle="modal" data-target="#exampleModalCenter">
+														Get New Coupon
+													  </button>
+													<h6 class="mt-3">Enter your coupon code if you have one.</h6>
+													
+													<input type="text" class="form-control" name="coupon"
+														id="couponInput" autocapitalize="on" placeholder="Coupon Code" />
+													<input type="text" id="couponTotal" name="total" class="sizefull s-text7 p-l-22 p-r-22" 
+														value="{{grandTotal}}" hidden>
+                            	{{!-- <input type="text" id="amountToBePaid" name="total" class="sizefull s-text7 p-l-22 p-r-22" 
+														  value="{{grandTotal}}"> --}}
+
+             </div>    
+             <a id="couponBtn" onclick="couponApply()"
+														class="btn flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4 text-white text-center  mt-2 btn btn-primary "
+														style="width: 100%;text-decoration: none;">Apply
+														Coupon</a>
+                                 <!-- Error handling of coupons  -->            
+													<div class="mt-3">
+														<div class="alert alert-danger" style="display: none;"
+															id="couponUsed" role="alert">
+															This Coupon was redeemed
+														</div>
+														<div class="alert alert-danger" style="display: none;"
+															id="couponInvalid" role="alert">
+															This Coupon is
+															invalid
+														</div>
+														<div class="alert alert-success" style="display: none;"
+															id="couponSuccess" role="alert">
+															Coupon Applied
+															Successfully
+														</div>
+														<div class="alert alert-warning" style="display: none;"
+															id="couponExpired" role="alert">
+															Sorry!!! Your
+															Coupon has been Expired
+														</div>
+														
+														<div class="alert alert-warning" style="display: none;"
+															id="couponMaxLimit" role="alert">
+															Sorry!!! Your
+															Coupon Has Reached Maximum Limit
+														</div>
+													</div>
+                              {{!-- modal management --}}
+                      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+              
+              <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLongTitle">All Available Coupons</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+                 </div>
+              {{#each AllCoupons }}
+              <div class="modal-body">
+                <div class="row ">
+                  <div class="col-12 ">
+                  <input type="text" name="" id="{{this._id}}" value="{{this.coupon}}"  hidden >
+                
+                  <div class="card">
+                    <div class="card-body">
+                    <h1 class="card-title">{{this.couponCode}}</h1>
+                    <p class="card-text">You Can get <span style="color:red"> {{this.discount}}%</span> Discount for this Coupon</p>
+                    <p>Expired on : {{this.expirationTime}}</p>
+                    <button type="button" onclick="copyFunction('{{this.couponCode}}')" class="btn btn-primary copy-button">Copy</button>
+                    </div>
+                  </div>
+                  </div>
+                  </div>
+                </div>
+                
+              {{/each}}
+              <div class="modal-footer"></div>
+              
+              </div>
+            </div>
+            </div>
+
+
+                  {{!-- <p>Please select your Payment Method:</p>
+                    <input type="radio" id="Cod" name="PaymentMethod" value="Cash On Delivery">
+                    <label for="Cod">Cash On Delivery</label><br>
+                    <input type="radio" id="Online" name="PaymentMethod" value="Online Payment">
+                    <label for="Online">Online Payment</label><br> --}}
+
+
+                  <div class="payment_item">
+                    <div class="radion_btn">
+                      <input type="radio" id="cod" name="paymentMethod" value="cod" />
+                      <label for="cod">Cash on Delivery</label>
+                      <div class="check"></div>
+                   
+                  <div class="payment_item ">
+                    <div class="radion_btn">
+                      <input type="radio" id="razorpay" name="paymentMethod" value="online" />
+                      <label for="razorpay">RazorPay</label>
+                      {{!-- <img src="/img1/product/single-product/card.jpg" alt="" /> --}}
+                      <div class="check"></div>
+                   
+                  {{!-- <div class="creat_account">
+                    <input type="checkbox" id="f-option4" name="selector" />
+                    <label for="f-option4">I've read and accept the </label>
+                    <a href="#">terms & conditions*</a>
+                  </div> --}}
+                  <button class="btn_3" type="submit">Proceed to Pay</button>
+                </div>
+              </div>
+              </form>
+            </div>
+          </div>
+  </section>
+  <!--================End Checkout Area =================-->
+
+  <!--::footer_part start::-->
+  <footer class="footer_part">
+    <div class="container">
+      <div class="row justify-content-around">
+        <div class="col-sm-6 col-lg-2">
+          <div class="single_footer_part">
+            <h4>Top Products</h4>
+            <ul class="list-unstyled">
+              <li><a href="">Managed Website</a></li>
+              <li><a href="">Manage Reputation</a></li>
+              <li><a href="">Power Tools</a></li>
+              <li><a href="">Marketing Service</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-2">
+          <div class="single_footer_part">
+            <h4>Quick Links</h4>
+            <ul class="list-unstyled">
+              <li><a href="">Jobs</a></li>
+              <li><a href="">Brand Assets</a></li>
+              <li><a href="">Investor Relations</a></li>
+              <li><a href="">Terms of Service</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-2">
+          <div class="single_footer_part">
+            <h4>Features</h4>
+            <ul class="list-unstyled">
+              <li><a href="">Jobs</a></li>
+              <li><a href="">Brand Assets</a></li>
+              <li><a href="">Investor Relations</a></li>
+              <li><a href="">Terms of Service</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-2">
+          <div class="single_footer_part">
+            <h4>Resources</h4>
+            <ul class="list-unstyled">
+              <li><a href="">Guides</a></li>
+              <li><a href="">Research</a></li>
+              <li><a href="">Experts</a></li>
+              <li><a href="">Agencies</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-4">
+          <div class="single_footer_part">
+            <h4>Newsletter</h4>
+            <p>Heaven fruitful doesn't over lesser in days. Appear creeping
+            </p>
+            <div id="mc_embed_signup">
+              <form target="_blank"
+                action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
+                method="get" class="subscribe_form relative mail_part">
+                <input type="email" name="email" id="newsletter-form-email" placeholder="Email Address"
+                  class="placeholder hide-on-focus" onfocus="this.placeholder = ''"
+                  onblur="this.placeholder = ' Email Address '">
+                <button type="submit" name="submit" id="newsletter-submit"
+                  class="email_icon newsletter-submit button-contactForm">subscribe</button>
+                <div class="mt-10 info"></div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="copyright_part">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="copyright_text">
+              <P>
+                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                Copyright &copy;
+                <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made
+                with <i class="ti-heart" aria-hidden="true"></i> by <a href="https://colorlib.com"
+                  target="_blank">Colorlib</a>
+                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+              </P>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="footer_icon social_icon">
+              <ul class="list-unstyled">
+                <li><a href="#" class="single_social_icon"><i class="fab fa-facebook-f"></i></a></li>
+                <li><a href="#" class="single_social_icon"><i class="fab fa-twitter"></i></a></li>
+                <li><a href="#" class="single_social_icon"><i class="fas fa-globe"></i></a></li>
+                <li><a href="#" class="single_social_icon"><i class="fab fa-behance"></i></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!--::footer_part end::-->
+
+
+  {{!-- razorpay --}}
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  {{!-- razorpay --}}
+
+  <script>
+    $('#checkoutForm').submit((e) => {
+      e.preventDefault()
+      $.ajax({
+        url: '/placeOrder',
+        method: 'post',
+        data: $('#checkoutForm').serialize(),
+        success: (response) => {
+          if (response.codSuccess) {
+            location.href = '/viewOrderDetails'
+          } else {
+            razorpayPayment(response)
+          }
+        }
+      })
+    });
+
+    function razorpayPayment(order) {
+      alert(order.amount)
+      var options = {
+        "key": "rzp_test_i25I2ajRWkBVEm", // Enter the Key ID generated from the Dashboard
+        "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+        "currency": "INR",
+        "name": "PetStore",
+        "description": "Test Transaction",
+        "image": "https://dcassetcdn.com/design_img/2214640/591796/591796_11733511_2214640_79205a82_image.png",
+        "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+        "handler": function (response) {
+          
+
+          verifyPayment(response,order)
+        },
+        "prefill": {
+          "name": "Gaurav Kumar",
+          "email": "gaurav.kumar@example.com",
+          "contact": "9999999999"
+        },
+        "notes": {
+          "address": "Razorpay Corporate Office"
+        },
+        "theme": {
+          "color": "#3399cc"
+        }
+      };
+      var rzp1 = new Razorpay(options);
+      rzp1.open();
+      rzp1.on('payment.failed', function (response) { 
+            alert(response.error.code); 
+            alert(response.error.description); 
+            alert(response.error.source); 
+            alert(response.error.step); 
+            alert(response.error.reason); 
+            alert(response.error.metadata.order_id); 
+            alert(response.error.metadata.payment_id); 
+          });
+    }
+
+    function verifyPayment(payment, order) {
+      alert('hhhhhhh')
+      $.ajax({
+        url: '/verifyPayment',
+        data: {
+          payment,
+          order
+        },
+        method: "post",
+        success: (response) => {
+          alert(response)
+          if (response.status) {
+            location.href = '/viewOrderDetails'
+          } else {
+            alert('payment failed')
+          }
+
+        }
+      })
+    }
+  </script>
+
+  <!-- jquery plugins here-->
+  <!-- jquery -->
+  <script src="aranoz/js/jquery-1.12.1.min.js"></script>
+  <!-- popper js -->
+  <script src="aranoz/js/popper.min.js"></script>
+  <!-- bootstrap js -->
+  <script src="aranoz/js/bootstrap.min.js"></script>
+  <!-- easing js -->
+  <script src="aranoz/js/jquery.magnific-popup.js"></script>
+  <!-- swiper js -->
+  <script src="aranoz/js/swiper.min.js"></script>
+  <!-- swiper js -->
+  <script src="aranoz/js/masonry.pkgd.js"></script>
+  <!-- particles js -->
+  <script src="aranoz/js/owl.carousel.min.js"></script>
+  <script src="aranoz/js/jquery.nice-select.min.js"></script>
+  <!-- slick js -->
+  <script src="aranoz/js/slick.min.js"></script>
+  <script src="aranoz/js/jquery.counterup.min.js"></script>
+  <script src="aranoz/js/waypoints.min.js"></script>
+  <script src="aranoz/js/contact.js"></script>
+  <script src="aranoz/js/jquery.ajaxchimp.min.js"></script>
+  <script src="aranoz/js/jquery.form.js"></script>
+  <script src="aranoz/js/jquery.validate.min.js"></script>
+  <script src="aranoz/js/mail-script.js"></script>
+  <script src="aranoz/js/stellar.js"></script>
+  <script src="aranoz/js/price_rangs.js"></script>
+  <!-- custom js -->
+  <script src="aranoz/js/custom.js"></script>
+
+
+ <script>
+      function autofill(fname,mobile,email,house,town,district,state,pincode){
+        document.getElementById('fname').value = fname
+				document.getElementById('mobile').value = mobile
+        document.getElementById('email').value = email
+        document.getElementById('house').value = house
+        {{!-- document.getElementById('localplace').value = localplace --}}
+				document.getElementById('town').value = town
+				document.getElementById('district').value = district
+				document.getElementById('state').value = state
+				document.getElementById('pincode').value = pincode
+      }
+    </script>  
+    <script>
+        function copyFunction(couponId) {
+      {{!-- alert("f;sl") --}}
+    var copyText = document.getElementById(couponId); copyText.select();
+    copyText.setSelectionRange(0, 99999);
+    navigator.clipboard.writeText(copyText.value);
+
+    $(".copy-button").on("click", function (e) {
+      e.preventDefault();
+      var self = $(this);
+      console.log(self.data("title"));
+      Swal.fire({
+        position: 'top-center',
+        icon: 'success',
+        title: 'Coupon Copied ' + "'" + copyText.value + "'",
+        showConfirmButton: false,
+        timer: 2000
+      })
+    })
+  }
+</script> 
+</body>
+</html>

@@ -1,0 +1,32 @@
+  </section> --}}<section>
+    <div class="card-header px-4 py-5 justify-content-end">
+            <h3 class="justify-content-end mt-5 mx-5">Thank you for your orders!</h3>
+          </div>
+ 
+ <table class="table table-bordered mt-5">
+  <thead>
+    <tr>
+      <th scope="col">Product-Name</th>
+      <th scope="col">Date</th>
+      <th scope="col">Payment-Method</th>
+      <th scope="col">Total</th>
+      <th scope="col">Payment-status</th>
+      <th scope="col">Track-order</th>
+    </tr>
+  </thead>
+  <tbody>
+     {{#each orderProducts}}
+    <tr>
+      <td>hi</td>
+      <td>{{this.ordered_on}}</td>
+      <td>{{this.paymentMethod}}</td>
+      <td>Rs.{{this.grandTotal}}.00/</td>
+      <td>{{this.payment_status}}</td>
+      {{!-- <td><h5><a class="btn_3" href="/orderTracking/{{this._id}}">Track Order</a></h5></td> --}}
+      <td><p class="mt-4 pt-2 mb-0"><a href="/orderTracking/{{this._id}}" style="color: #f37a27;">Track Order</td>
+    </tr>
+    {{/each}}
+   
+  </tbody>
+</table>
+ </section>
