@@ -1,6 +1,6 @@
 const db=require("../config/connections");
 const userData=require("../models/user");
-const nodeMailer=require("nodeMailer");
+const nodeMailer=require('nodemailer')
 const cart = require("../models/cart");
 const bcrypt=require("bcrypt");
 const { promise, reject } = require("bcrypt/promises");

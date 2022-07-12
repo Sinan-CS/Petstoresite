@@ -8,7 +8,7 @@ const userData = require("../models/user");
 const wishlistModel=require("../models/wishlist")
 const db=require("../config/connections");
 const bcrypt=require('bcrypt');
-const nodeMailer=require("nodeMailer");
+const nodeMailer=require('nodemailer');
 const couponmodel=require("../models/Coupon");
 const orderModel=require('../models/order')
 
