@@ -489,7 +489,7 @@ router.post("/addAddress/:id", (req, res) => {
 
 router.get("/addAddress", async(req, res) => {
   let user = req.session.user;
-  res.render("user/profile/addAddress", { user });
+  res.render("user/profile/addaddress", { user });
 });
 
 router.get("/editAddress/:id", (req, res) => {
