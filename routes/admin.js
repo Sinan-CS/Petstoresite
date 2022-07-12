@@ -83,6 +83,47 @@ router.get("/logout", (req, res, next) => {
 
 
 
+// ---------------------------------------chart-------------------------
+router.post("/getData", async (req, res) => {
+  const date = new Date(Date.now());
+  const month = date.toLocaleString("default", { month: "long" });
+  productHelpers.salesReport(req.body).then((data) => {
+    // let pendingAmount = data.pendingAmount;
+    let salesReport = data.salesReport;
+    let brandReport = data.brandReport;
+    // let orderCount = data.orderCount;
+    // let totalAmountPaid = data.totalAmountPaid;
+    // let totalAmountRefund = data.totalAmountRefund;
+     console.log(month._id)
+    let dateArray = [];
+    let totalArray = [];
+    salesReport.forEach((s) => {
+      dateArray.push(`${month}-${s._id} `);
+      totalArray.push(s.total);
+    });
+    console.log(salesReport)
+    let brandArray = [];
+    let sumArray = [];
+    brandReport.forEach((s) => {
+      brandArray.push(s._id);
+      sumArray.push(s.totalAmount);
+    });
+    res.json({
+      // totalAmountRefund,
+      dateArray,
+      totalArray,
+      brandArray,
+      sumArray,
+      // orderCount,
+      // totalAmountPaid,
+      // pendingAmount,
+    });
+  });
+});
+
+
+
+
 
 
 

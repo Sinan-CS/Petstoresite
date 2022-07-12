@@ -8,7 +8,9 @@ const cartSchema = new mongoose.Schema({
         ref:'product'},
         MRP:{type:Number},
         quantity:{type:Number,default: 1},
-        subTotal:{type:Number,default:0}   
+        subTotal:{type:Number,default:0},
+        productName:{type:String}
+
 }]
 })
 const cart= mongoose.model('cart',cartSchema)

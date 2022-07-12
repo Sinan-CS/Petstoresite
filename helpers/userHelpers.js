@@ -242,7 +242,7 @@ addToCart: (proId, userId) => {
         await cart
           .findOneAndUpdate(
             { user_Id: userId },
-            { $push: { products: { pro_Id: proId, MRP: product.MRP } } }
+            { $push: { products: { pro_Id: proId, MRP: product.MRP ,productName:product.Product_Name} } }
           )
           .then(async (res) => {
             resolve({ msg: '"Added", count: res.product.length + 1 ' });
@@ -251,7 +251,7 @@ addToCart: (proId, userId) => {
     } else {
       const newcart = new cart({
         user_Id: userId,
-        products: { pro_Id: proId, MRP: product.MRP },
+        products: { pro_Id: proId, MRP: product.MRP,productName:product.Product_Name },
       });
       await newcart.save((err, result) => {
         if (err) {
