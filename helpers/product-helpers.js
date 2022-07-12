@@ -10,6 +10,8 @@ const db=require("../config/connections");
 const bcrypt=require('bcrypt');
 const nodeMailer=require("nodeMailer");
 const couponmodel=require("../models/Coupon");
+const orderModel=require('../models/order')
+
 
 module.exports = {
 
@@ -310,6 +312,8 @@ getProductDetails:(proId)=>{
         resolve(allorders)
     })
 },
+
+
 //-----------------------------------------------------------------------------------------------//
 AddCoupon:(data)=>{ 
   console.log(data);

@@ -428,7 +428,7 @@ router.get("/viewOrderDetails", async (req, res) => {
     res.render("user/orderSuccess", { ordered_on,user, orderProducts});
   });
 });
-
+ 
 
 
 
@@ -437,7 +437,7 @@ router.get('/viewOrderProducts/:id',(req,res)=>{
   userHelpers.getorderProducts(req.params.id).then((response) => {
     console.log(response.product.status);
     const order=response
-    
+     
     if(order.product[0].status=='Cancelled'){
       order.product[0].cancelled=true
     }

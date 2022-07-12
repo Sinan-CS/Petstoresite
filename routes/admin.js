@@ -3,6 +3,7 @@ var router = express.Router();
 const category = require("../models/category");
 const productHelpers = require("../helpers/product-helpers");
 const Storage = require("../middleware/multer");
+const moment=require('moment')
 
 
 /* GET users listing. */
@@ -293,6 +294,42 @@ router.get("/deleteProduct/:id", (req, res) => {
   });
   console.log(proId);
 });
+
+// ------------------------------------------------------------------------------------------
+
+router.get('/ordermanagement',(req, res) => {
+  productHelpers.allorders().then((response) => {
+    console.log(response);
+    const allorders = response;
+    allorders.forEach(element => {
+      element.ordered_on = moment(element.ordered_on).format("MMM Do YY");
+        });
+  
+    res.render('admin/users/order-management', { layout: "adminLayout",allorders })
+  })
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //-----------------------------------Block/unblock-user-----------------------------------------------//
 
