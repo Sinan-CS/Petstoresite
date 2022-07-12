@@ -2,7 +2,7 @@ var express = require("express");
 var router = express.Router();
 const category = require("../models/category");
 const productHelpers = require("../helpers/product-helpers");
-const Storage = require("../middleware/multer");
+const Storage = require("../Middleware/multer");
 const moment=require('moment')
 
 
