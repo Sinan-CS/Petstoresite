@@ -509,7 +509,27 @@
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
   {{!-- razorpay --}}
 
+     <script>
+        function copyFunction(couponId) {
+  
+    var copyText = document.getElementById(couponId); copyText.select();
+    copyText.setSelectionRange(0, 99999);
+    navigator.clipboard.writeText(copyText.value);
 
+    $(".copy-button").on("click", function (e) {
+      e.preventDefault();
+      var self = $(this);
+      console.log(self.data("title"));
+      Swal.fire({
+        position: 'top-center',
+        icon: 'success',
+        title: 'Coupon Copied ' + "'" + copyText.value + "'",
+        showConfirmButton: false,
+        timer: 2000
+      })
+    })
+  }
+</script> 
 
 
 
@@ -517,7 +537,7 @@
 
 <script>
 			function couponApply() {
-        alert("coupon")
+      
 				let couponCode = document.getElementById('couponInput').value
 				let couponTotal = document.getElementById('couponTotal').value
         let DeliveryCharges=document.getElementById('DeliveryCharges').value
@@ -532,7 +552,7 @@
 					},
 					method: 'post',
 					success: (response) => {
-            alert(response)
+ 
 						if (response.couponSuccess) {  
 							let oldTotal =parseInt(document.getElementById('couponTotal').value)
               {{!-- alert(response.total) --}}
@@ -606,6 +626,11 @@
 				})
 			}
 		</script>
+     
+
+
+
+
 
   <script>
     $('#checkoutForm').submit((e) => {
