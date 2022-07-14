@@ -43,15 +43,18 @@
               {{/each}}
             </div>
            
-
+          <div class="d-flex justify-content-between">
+              <p class="text-muted mb-0">Payment-method:{{orderProducts.paymentMethod}}</p>
+              <p class="text-muted mb-0"><span class="fw-bold me-4">Delivery Charges</span>{{orderProducts.ShippingCharge}} </p>
+            </div>
             <div class="d-flex justify-content-between pt-2">
               <p class="fw-bold mb-0">Order Details</p>
-              <p class="text-muted mb-0"><span class="fw-bold me-4">Total</span>{{orderProducts.Total}}</p>
+              <p class="text-muted mb-0"><span class="fw-bold me-4">Total</span>{{orderProducts.grandTotal}}</p>
             </div>
             
             <div class="d-flex justify-content-between pt-2">
               <p class="text-muted mb-0">order ID:{{orderProducts._id}}</p>
-               <p class="text-muted mb-0"><span class="fw-bold me-4">Discount</span> $19.00</p>
+               <p class="text-muted mb-0"><span class="fw-bold me-4">Discount</span>{{orderProducts.discountedPrice}}</p>
             </div>
 
             <div class="d-flex justify-content-between">
@@ -59,10 +62,7 @@
               <!--<p class="text-muted mb-0"><span class="fw-bold me-4">GST 18%</span> 123</p>-->
             </div>
 
-            <div class="d-flex justify-content-between mb-5">
-              <p class="text-muted mb-0">Payment-method:{{orderProducts.paymentMethod}}</p>
-              <p class="text-muted mb-0"><span class="fw-bold me-4">Delivery Charges</span>{{orderProducts.ShippingCharge}} </p>
-            </div>
+           
           </div>
           <div class="card-footer border-0 px-4 py-5"
             style="background-color: #b3c4c9; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
@@ -78,7 +78,7 @@
              <div class="d-flex justify-content-between pt-2">
               <p class="text mb-0">Email:{{orderProducts.deliveryDetails.email}}</p>
                <h5 class="d-flex align-items-center justify-content-end text-dark text-uppercase mb-0">Total
-              paid: <span class="h2 mb-0 ms-2">₹ {{orderProducts.grandTotal}}</span></h5>
+              paid: <span class="h2 mb-0 ms-2">₹ {{orderProducts.mainTotal}}</span></h5>
             </div>
             
              <div class="d-flex justify-content-between pt-2">

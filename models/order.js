@@ -25,10 +25,12 @@ const orderSchema = new mongoose.Schema({
       pincode: Number,
     }
 ,
-  Total:{type:Number},
+  Total:{type:Number}, 
   ShippingCharge:{type:Number},
   grandTotal: { type: Number, default: 0 },
+  mainTotal:{type:Number},
   ordered_on: { type: Date },
+  discountedPrice:{type:Number},
   payment_status: { type: String },
 });
 const orderModel = mongoose.model("order", orderSchema);

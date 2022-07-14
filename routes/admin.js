@@ -352,16 +352,30 @@ router.get('/ordermanagement',(req, res) => {
 
 
 
+// ------------------------------------------add coupon------------------------
 
+router.get("/coupon-manegement", (req, res) => {
+  productHelpers.getAllCoupons(req.body).then((response) => {
+    const AllCoupons = response;
+    res.render("admin/coupon-manegement", { AllCoupons, layout: false });
+  });
+});
 
+router.get("/deletecoupon/:id", (req, res) => {
+  productHelpers.deletecoupon(req.params.id).then((response) => {
+    res.json({ coupondeleted: true });
+  });
+});
 
+router.get("/addcoupon", (req, res) => {
+  res.render("admin/addcoupon", { layout: false });
+});
 
-
-
-
-
-
-
+router.post("/AddCoupon", (req, res) => {
+  productHelpers.AddCoupon(req.body).then(() => {
+    res.redirect("/admin/coupon-manegement");
+  });
+});
 
 
 

@@ -10,6 +10,7 @@ const adminDatas = require("../models/adminData");
 const productData = require("../models/productData");
 const wishlistModel=require("../models/wishlist")
 const orderModel = require("../models/order");
+const  couponmodel= require('../models/Coupon')
 const { Mongoose, default: mongoose } = require("mongoose");
 const { compileTrust } = require("express/lib/utils");
 const Razorpay = require('razorpay');
@@ -471,6 +472,9 @@ totalAmount:(userData)=>{
 // ------------------------place order------------------------------------------------------
 
 placeOrder:(order,cartItem,grandTotal,deliveryCharge,netTotal,user)=>{
+  const mainTotal=parseInt(order.mainTotal)
+  console.log("sdkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
+  console.log(order.mainTotal)
   return new Promise(async(resolve,reject)=>{       
    const status=order.paymentMethod==='cod'?'placed':'pending' 
   //  const status=order.paymentMethod==='cod'?'placed':'pending'
@@ -481,6 +485,8 @@ placeOrder:(order,cartItem,grandTotal,deliveryCharge,netTotal,user)=>{
      Total:netTotal,
      ShippingCharge:deliveryCharge,
      grandTotal:grandTotal,
+     mainTotal:mainTotal,
+     discountedPrice:order.discountedPrice,
      payment_status:status, 
      paymentMethod:order.paymentMethod,
      ordered_on:new Date(),
@@ -541,6 +547,7 @@ userprofile:(userid)=>{
   //----------------------------------------create-rasorpay------------------------------------------------------//
 createRazorpay:(orderid,grandTotal)=>{  
   console.log("+++++++++++++++++++++++++++++++++")
+  console.log(grandTotal);
   console.log(orderid);   
   return new Promise((resolve,reject)=>{ 
     instance.orders.create({
@@ -549,7 +556,7 @@ createRazorpay:(orderid,grandTotal)=>{
       receipt: ""+orderid            
     },
     function(err,order){
-      if(err){
+      if(err){  
         console.log(err);
       }else{
         console.log("New order:",order);
@@ -698,6 +705,62 @@ getCartCount:(userId)=>{
     }
     resolve(Count)
   })
+},
+
+
+
+
+
+// -------------------------validate coupon---------------------
+validateCoupon: (data, userId) => {
+  return new Promise(async (resolve, reject) => {
+    console.log(data.coupon);
+    obj = {};
+    const coupon = await couponmodel.findOne({ couponCode: data.coupon });
+    if (coupon) {
+      if (coupon.limit > 0) {
+        checkUserUsed = await couponmodel.findOne({
+          couponCode: data.coupon,
+          usedUsers: { $in: [userId] },
+        });
+        if (checkUserUsed) {
+          obj.couponUsed = true;
+          obj.msg = " You Already Used A Coupon";
+          console.log(" You Already Used A Coupon");
+          resolve(obj);
+        } else {
+          let nowDate = new Date();
+          date = new Date(nowDate);
+          if (date <= coupon.expirationTime) {
+            await couponmodel.updateOne(
+              { couponCode: data.coupon },
+              { $push: { usedUsers: userId } }
+            );
+            await couponmodel.findOneAndUpdate(
+              { couponCode: data.coupon },
+              { $inc: { limit: -1 } }
+            );
+            let total = parseInt(data.total);
+            let percentage = parseInt(coupon.discount);
+            let discoAmount = ((total * percentage) / 100).toFixed();
+            obj.discoAmountpercentage = percentage;
+            obj.total = total - discoAmount;
+            obj.success = true;
+            resolve(obj);
+          } else {
+            obj.couponExpired = true;
+            resolve(obj);
+          }
+        }
+      } else {
+        obj.couponMaxLimit = true;
+        resolve(obj);
+      }
+    } else {
+      obj.invalidCoupon = true;
+      resolve(obj);
+    }
+  });
 },
 
 

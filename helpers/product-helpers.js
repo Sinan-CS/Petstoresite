@@ -407,58 +407,72 @@ salesReport: (data) => {
     resolve(response);
   });
 },
+  
 
 
+// -----------------------------------coupon------------------
 
+AddCoupon: (data) => {
+  return new Promise(async (resolve, reject) => {
+    const newCoupon = new couponmodel({
+      couponName: data.couponName,
+      couponCode: data.CoupoCode,
+      limit: data.Limit,
+      expirationTime: data.ExpireDate,
+      discount: data.discount,
+    });
+    await newCoupon.save();
+    resolve();
+  });
+},
+getAllCoupons: () => {
+  return new Promise(async (resolve, reject) => {
+    const AllCoupons = await couponmodel.find({}).lean();
+    resolve(AllCoupons);
+  });
+},
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+deletecoupon: (couponId) => {
+  return new Promise(async (resolve, reject) => {
+    const deletecoupon = await couponmodel.findByIdAndDelete({
+      _id: couponId,
+    });
+    resolve(deletecoupon);
+  });
+},
 
 
 //-----------------------------------------------------------------------------------------------//
-AddCoupon:(data)=>{ 
-  console.log(data);
-  return new Promise(async(resolve,reject)=>{
-    const newCoupon=new couponmodel({
-      couponName:data.couponName,
-      couponCode:data.CoupoCode,
-      limit:data.Limit,
-      expirationTime:data.ExpireDate,
-      discount:data.discount
-    })
-    await newCoupon.save();
-    resolve()
-  })
-},
+// AddCoupon:(data)=>{ 
+//   console.log(data);
+//   return new Promise(async(resolve,reject)=>{
+//     const newCoupon=new couponmodel({
+//       couponName:data.couponName,
+//       couponCode:data.CoupoCode,
+//       limit:data.Limit,
+//       expirationTime:data.ExpireDate,
+//       discount:data.discount
+//     })
+//     await newCoupon.save();
+//     resolve()
+//   })
+// },
 
-//-----------------------------------------------------------------------------------------------------/
+// //-----------------------------------------------------------------------------------------------------/
 
-getAllCoupons:()=>{
-  console.log("kasjfkjk");
-  return new Promise (async(resolve,reject)=>{
-    const AllCoupons=await couponmodel.find({}).lean()
-    resolve(AllCoupons)
-  })
-},
-deletecoupon:(couponId)=>{
-  return new Promise(async(resolve,reject)=>{
-    console.log(couponId);
-    const deletecoupon=await couponmodel.findByIdAndDelete({_id:couponId})
-    resolve(deletecoupon)
-  })
-    },
+// getAllCoupons:()=>{
+//   console.log("kasjfkjk");
+//   return new Promise (async(resolve,reject)=>{
+//     const AllCoupons=await couponmodel.find({}).lean()
+//     resolve(AllCoupons)
+//   })
+// },
+// deletecoupon:(couponId)=>{
+//   return new Promise(async(resolve,reject)=>{
+//     console.log(couponId);
+//     const deletecoupon=await couponmodel.findByIdAndDelete({_id:couponId})
+//     resolve(deletecoupon)
+//   })
+//     },
   
 }
