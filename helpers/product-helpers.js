@@ -190,7 +190,7 @@ module.exports = {
             if (err) {
               reject({ msg: "Product can't be added" });
             } else {
-              resolve({ data: result, msg: "Product Added Successfully" });
+              resolve({ data: result, msg: "Product Added Successfully!" });
             }
           });
         }
