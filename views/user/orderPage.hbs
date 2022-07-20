@@ -1,12 +1,12 @@
-  </section> --}}<section>
-    <div class="card-header px-4 py-5 justify-content-end">
+  </section> <section>
+    {{!-- <div class="card-header px-4 py-5 justify-content-end">
             <h3 class="justify-content-end mt-5 mx-5">Thank you for your orders!</h3>
           </div>
  
  <table class="table table-bordered mt-5">
   <thead>
     <tr>
-      <th scope="col">Product-Name</th>
+      <th scope="col">Order-Id</th>
       <th scope="col">Date</th>
       <th scope="col">Payment-Method</th>
       <th scope="col">Total</th>
@@ -17,7 +17,7 @@
   <tbody>
      {{#each orderProducts}}
     <tr>
-      <td>hi</td>
+      <td> Id: {{this._id}}</td>
       <td>{{this.ordered_on}}</td>
       <td>{{this.paymentMethod}}</td>
       <td>Rs.{{this.grandTotal}}.00/</td>
@@ -25,8 +25,76 @@
       {{!-- <td><h5><a class="btn_3" href="/orderTracking/{{this._id}}">Track Order</a></h5></td> --}}
       <td><p class="mt-4 pt-2 mb-0"><a href="/orderTracking/{{this._id}}" style="color: #f37a27;">Track Order</td>
     </tr>
-    {{/each}}
+    {{!-- {{/each}} --}}
    
   </tbody>
 </table>
+
+ --}}
+
+ <section>  
+        <div class="container pt-5" >
+            <div class="mt-5 ">
+                <h4>Orders List</h4>
+            </div>
+        </div>
+        <section class="mt-5 mb-5" >
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <table class="table table-striped" id="user-table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Order ID & Date</th>
+                                    
+                                    <th scope="col">User</th>
+                                    
+                                    <th scope="col">Total</th>
+                                    <th scope="col">Payment</th>
+                                    
+                                    <th scope="col">Details</th>
+
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each orderProducts}}
+                                <tr>
+ 
+                                    <td scope="row">
+                                        <div>Date :{{this.ordered_on}}</div>
+                                        <div>Order ID :{{this._id}}</div>
+                                    </td>
+                                    
+                                    <td> 
+                                         
+                                        <div>Address :{{this.deliveryDetails.house}} </div>
+                                        <div>PIN :{{deliveryDetails.pincode}} </div>
+                                        <div>Mobile :{{this.deliveryDetails.number}}</div>
+                                    </td>
+                                    <td><div>RS.{{this.grandTotal}}</div>
+                                        {{!-- <div>Discount : RS.</div> --}}
+                                    </td>
+                                    
+                                    <td>
+                                        <div>Method :{{this.paymentMethod}} </div>
+                                        <div>Status :{{this.payment_status}}</div>
+                                    </td>
+                                    
+                                    <td><a href="/viewOrderProducts/{{this._id}}" class="btn primary-btn">Details</a></td>
+
+
+
+                                </tr>
+                                {{/each}}
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+</section>
+
+
  </section>

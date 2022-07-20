@@ -351,13 +351,30 @@ router.get('/ordermanagement',(req, res) => {
 })
 
 
+router.get("/viewordersinorder/:id",async(req,res)=>{ 
+
+  orderProducts= await productHelpers.OrderDetails(req.params.id)
+  console.log(orderProducts+"++++++++++++")
+
+  res.render("admin/ordersinorder",{layout:"adminlayout",orderProducts})
+})
+
+router.post('/changeOrderStatus',(req,res)=>{
+  console.log(req.body)
+  console.log('inside change')
+  productHelpers.changeOrderStatus(req.body).then((response)=>{
+    res.redirect('/admin/manageOrders')
+  })
+})
+
+
 
 // ------------------------------------------add coupon------------------------
 
 router.get("/coupon-manegement", (req, res) => {
   productHelpers.getAllCoupons(req.body).then((response) => {
     const AllCoupons = response;
-    res.render("admin/coupon-manegement", { AllCoupons, layout: false });
+    res.render("admin/coupon-manegement", { AllCoupons, layout:"adminLayout"  });
   });
 });
 
@@ -368,7 +385,7 @@ router.get("/deletecoupon/:id", (req, res) => {
 });
 
 router.get("/addcoupon", (req, res) => {
-  res.render("admin/addcoupon", { layout: false });
+  res.render("admin/addcoupon", {layout:"adminLayout"  });
 });
 
 router.post("/AddCoupon", (req, res) => {
@@ -378,10 +395,28 @@ router.post("/AddCoupon", (req, res) => {
 });
 
 
+// ------------------order status------------------
+
+router.get("/manageOrders",async(req,res)=>{
+
+  const orders = await  productHelpers.getAllOrders()
+
+    orders.forEach((element)=>{
+      element.ordered_on = moment(element.ordered_on).format('MMMM Do YYYY, h:mm:ss a')
+     })
+  
+  res.render("admin/users/order-management",{layout:"adminlayout",orders})
+})
 
 
 
-
+router.post('/changeOrderStatus',(req,res)=>{
+  console.log(req.body)
+  console.log('inside change')
+  productHelpers.changeOrderStatus(req.body).then((response)=>{
+    res.redirect('/manageOrders')
+  })
+})
 
 
 
@@ -413,4 +448,15 @@ router.get("/UnBlockuser/:id", (req, res) => {
     res.json({status:true})
   });
 });
+  
+
+
+
+
+
+
+
+
+
+
 module.exports = router;

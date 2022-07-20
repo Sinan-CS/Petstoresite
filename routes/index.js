@@ -352,7 +352,7 @@ router.get("/checkout", async (req, res) => {
     subTotal,
     user,
     cartItems,
-     
+        
 
      
     
@@ -410,6 +410,25 @@ router.post("/verifyPayment", (req, res) => {
       res.json({ status: false });
     });
 });
+     
+
+router.get("/orderPage", async (req, res) => {
+  let user = req.session.user;
+  console.log(user);
+  let cartcount = await userHelpers.getCartCount(req.session.user._id);
+  let wishlistCount=await userHelpers.getWishlistcount(req.session.user._id);
+    userHelpers.getAllOrderList(req.session.user._id).then((response) => {
+    const orderProducts = response;
+    console.log(orderProducts+'444444444444444444444444444444444444444444');
+    orderProducts.forEach(element=>{
+    element.ordered_on=moment(element.ordered_on).format('MMMM Do YYYY, h:mm:ss a'); 
+    })
+    console.log('444444444444444444444444444444444444444444');
+    res.render("user/orderPage", {user,orderProducts,cartcount,wishlistCount});
+  });  
+});
+    
+
   
  
 
@@ -448,6 +467,50 @@ router.get('/viewOrderProducts/:id',(req,res)=>{
   })
   })
 
+   
+
+
+  router.get("/orderTracking/:id", async (req, res) => {
+    const orderId = req.params.id
+    let user = req.session.user;
+    console.log(user);
+    console.log(orderId+'777777777777777777777777777777');
+    userHelpers.getorderProducts(orderId).then((response) => {
+      const orderProducts = response;
+      console.log(orderProducts+'99999999999999999999999999999999999999');
+      orderProducts.forEach(element=>{
+        element.ordered_on=moment(element.ordered_on).format('MMMM Do YYYY, h:mm:ss a'); 
+        })
+      res.render("user/orderTracking",{user,orderProducts});
+    });
+  });
+
+  router.get('/about',  async (req, res, next)=> {
+    let user = req.session.user;
+    const products = await productHelpers.getProducts();
+    const product=await productHelpers.getProduct();
+    if(user){
+    let cartcount = await userHelpers.getCartCount(req.session.user_id);
+    let wishlistCount=await userHelpers.getWishlistcount(req.session.user_id);
+    res.render('user/about',{cartcount,wishlistCount,user,products,product});
+    }
+    else{
+    res.render('user/about',{products,product});
+    }
+  });
+  router.get("/contact", async (req, res) => {
+    let user = req.session.user;
+    const products = await productHelpers.getProducts();
+    const product=await productHelpers.getProduct();
+    if(user){
+    let cartcount = await userHelpers.getCartCount(req.session.user_id);
+    let wishlistCount=await userHelpers.getWishlistcount(req.session.user_id);
+    res.render('user/contact',{cartcount,wishlistCount,user,products,product});
+    }
+    else{
+    res.render('user/contact',{products,product});
+    }
+  });
 
 
 
@@ -458,7 +521,7 @@ router.get('/viewOrderProducts/:id',(req,res)=>{
 
 
 
-
+    
 
 
 
@@ -580,6 +643,20 @@ router.post("/couponApply", async (req, res) => {
     }
   });
 });
+
+
+//  ----------------------------------cancel order----------------------------
+router.post("/cancel-order", (req, res) => {
+  console.log("******")
+  console.log(req.body)
+  console.log("********")
+  userHelpers.cancelorder(req.body).then((response) => {
+    console.log("****")
+    console.log(response)
+    res.json({ status: true });
+  });
+});  
+ 
 
 
 

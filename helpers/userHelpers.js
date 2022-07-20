@@ -317,6 +317,27 @@ getCartCount: (userid) => {
     }
   });
 },
+
+
+getWishlistcount: (userId) => {
+  return new Promise(async (resolve, reject) => {
+    let count = 0;
+    const user = await wishlistModel.findOne({ user_Id: userId });
+    if (user) {
+      count = user.products.length;
+      resolve(count);
+    } else {
+      resolve(count);
+    }
+  });
+},
+
+
+
+
+
+
+
 //--------------------------------------------------------------------------------------------------------------//
 changeProductQuantity:(data,user) => {
   return new Promise(async (resolve, response) => {
@@ -512,18 +533,19 @@ placeOrder:(order,cartItem,grandTotal,deliveryCharge,netTotal,user)=>{
 
 
 //------------------------------------------------getorderProducts---------------------------------------------//
-getorderProducts:(orderid)=>{
-  console.log(orderid);
-  return new Promise(async(resolve,reject)=>{
-      const orderdetails=await orderModel.findOne({_id:orderid}).populate("product.pro_Id").lean()
-      console.log(orderdetails);
-      console.log("8888888888888888888888888888555555555555555");
-      resolve(orderdetails)
-  })   
-},
+// getorderProducts:(orderid)=>{
+//   console.log(orderid);
+//   return new Promise(async(resolve,reject)=>{
+//       const orderdetails=await orderModel.findOne({_id:orderid}).populate("product.pro_Id").lean()
+//       console.log(orderdetails);
+//       console.log("8888888888888888888888888888555555555555555");
+//       resolve(orderdetails)
+//   })   
+// },
 
 //--------------------------------------------------getAllOrderList--------------------------------------------//
 getAllOrderList: (userId) => {
+  console.log(userId,"hello user id")
   return new Promise(async (resolve, reject) => {
    let orderList = await orderModel
       .find({ user_Id: userId })
@@ -542,6 +564,83 @@ userprofile:(userid)=>{
  
 })
   },
+        //  -----------------------------------------------------
+
+        getorderProducts:(orderid)=>{
+          console.log(orderid);
+          return new Promise(async(resolve,reject)=>{
+              const orderdetails=await orderModel.findOne({_id:orderid}).populate("product.pro_Id").lean()
+              // console.log(orderdetails);
+              resolve(orderdetails)
+          })   
+        },
+    
+    
+        // cancelorder:(data)=>{
+        //   console.log("-----------------");
+        //   console.log(data);
+        //   const status='Cancelled'
+        //   return new Promise (async(resolve,reject)=>{
+        //     const cancelorder=await orderModel.findOneAndUpdate({_id:data.orderId,'product.pro_Id':data.proId},
+        //     {
+        //      $set:{
+        //       "product.$.status":status
+        //     }
+        //   },
+        //   )
+        //   // await productData.findOneAndUpdate({_id:data.proId},
+        //   //   {
+        //   //     // $inc:{
+        //   //     //   Stoke:1
+        //   //     // }
+        //   //   })
+        //   resolve()
+      
+        //   })
+        // },
+
+
+        cancelorder:(data)=>{
+          orderId = mongoose.Types.ObjectId(data.orderId);
+          proId = mongoose.Types.ObjectId(data.proId);
+          console.log("print")
+          console.log(orderId+"orderId")
+          console.log(proId+"proId")
+          const status = "Cancelled";
+          return new Promise(async(resolve,reject)=>{
+            const cancelorder = await orderModel.updateMany(
+              {_id:orderId,"product._id":proId},
+              {$set:
+                {
+                  "product.$.status":status,
+                  "product.$.orderCancelled":true,
+                }}
+            )
+            console.log(cancelorder,"inside cancel order")
+            resolve()
+          })
+          },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   //----------------------------------------create-rasorpay------------------------------------------------------//

@@ -1,4 +1,4 @@
-<div class="card shadow mb-4 mt-5 mx-5 ">
+<div class="card shadow mb-4 mt-5 mx-5 bg-secondary ">
                         <div class="card-header py-3 d-flex justify-content-between">
                             <h6 class="m-0 font-weight-bold text-primary">ORDER MANAGEMENT</h6>
                        
@@ -8,12 +8,12 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Order ID & Date</th>
-                                            <th>User</th>
-                                            <th>Total</th>
-                                            <th>Payment</th>
-                                            <th>Payment Status</th>
-                                            <th>Details</th>
+                                            <th class="text-light">Order ID & Date</th>
+                                            <th class="text-light">User</th>
+                                            <th class="text-light">Total</th>
+                                            <th class="text-light">Payment</th>
+                                            <th class="text-light">Payment Status</th>
+                                            <th class="text-light">Details</th>
                                          
                                            
 
@@ -23,16 +23,17 @@
                                     <tbody>
                                         {{#each allorders}}
                                         <tr>
-                                            <td>ID: {{this._id}} <br>Date: {{this.ordered_on}}</td>
+                                            <td class="text-light" >ID: {{this._id}} <br>Date: {{this.ordered_on}}</td>
                                             
-                                            <td>{{this.deliveryDetails.name}} <br>{{this.deliveryDetails.email}}</td>
-                                            <td>{{this.grandTotal}}</td>
-                                            <td>{{this.paymentMethod}}</td>
+                                            <td class="text-light" >ID: {{this._id}} <br>Date: {{this.ordered_on}}</td>
+                                            <td  class="text-light">{{this.deliveryDetails.name}} <br>{{this.deliveryDetails.email}}</td>
+                                            <td class="text-light" >{{this.grandTotal}}</td>
+                                            <td class="text-light">{{this.paymentMethod}}</td>
                                             {{!-- {{#each product}}
                                             <td>{{this.status}}</td>
                                             {{/each}} --}}
-                                            <td>{{this.payment_status}}</td>
-                                           <td><a href="/admin/viewOrderProducts/{{this._id}}" class="btn btn-primary">Details</a></td>
+                                            <td class="text-light">{{this.payment_status}}</td>
+                                           <td class="text-light"><a href="/admin/viewordersinorder/{{this._id}}" class="btn btn-primary">Details</a></td>
                                         </tr>
                                         {{/each}}
                                        

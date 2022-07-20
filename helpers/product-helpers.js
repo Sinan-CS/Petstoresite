@@ -442,6 +442,62 @@ deletecoupon: (couponId) => {
 },
 
 
+OrderDetails:(orderid)=>{
+
+  return new Promise(async(resolve,reject)=>{
+  
+    const orderdetails = await orderModel.findOne({_id:orderid}).populate("product.pro_Id").lean()
+    resolve(orderdetails)
+  })
+  
+  },
+
+  changeOrderStatus: (data) => {
+    console.log(data);
+    return new Promise(async (resolve, reject) => {
+      const state = await orderModel.findOneAndUpdate(
+        { _id: data.orderId, "product._id": data.proId },
+        {
+          $set: {
+            "product.$.status": data.orderStatus,
+          },
+        }
+      );
+      console.log(state, "state");
+  
+      resolve();
+    }).catch((err) => {
+      console.log(err, "errrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
+    });
+  },
+
+
+
+
+
+  getAllOrders:()=>{
+
+    return new Promise (async(resolve,reject)=>{
+      const orders = await orderModel.find({}).populate("product.pro_Id").sort({_id:-1}).lean()
+      resolve(orders)
+    })
+    
+    },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //-----------------------------------------------------------------------------------------------//
 // AddCoupon:(data)=>{ 
 //   console.log(data);
